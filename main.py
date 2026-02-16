@@ -6,6 +6,10 @@ root.title("Music Player")
 root.geometry("420x600")
 root.config(bg="#1a1a1a")  # Dark background
 
+logoImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/logo-spotify.jpg")
+logo = ImageTk.PhotoImage(logoImage)
+root.iconphoto(True, logo)
+
 # --- Load images ---
 searchImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/search.jpg")
 searchImage = searchImage.resize((25, 25))
@@ -86,19 +90,5 @@ next_button = tk.Button(buttons_frame, image=next_btn, bd=0, bg="#1a1a1a",
                         command=lambda: print("Next"))
 next_button.pack(side="left", padx=15)
 
-# --- Volume control (optional) ---
-volume_frame = tk.Frame(root, bg="#1a1a1a")
-volume_frame.pack(pady=10)
-
-volume_label = tk.Label(volume_frame, text="🔊", font=("Arial", 14), 
-                        bg="#1a1a1a", fg="white")
-volume_label.pack(side="left", padx=5)
-
-volume_slider = tk.Scale(volume_frame, from_=0, to=100, orient="horizontal",
-                         length=150, bg="#1a1a1a", fg="white", 
-                         troughcolor="#333333", highlightthickness=0, 
-                         bd=0, showvalue=0, activebackground="#1DB954")
-volume_slider.set(70)
-volume_slider.pack(side="left")
 
 root.mainloop()
