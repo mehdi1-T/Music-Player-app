@@ -1,10 +1,20 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+from audio_player import play_song
+import random
+
+def search():
+    global query
+    query = search_input.get()
+    play_song(query)
+
+def play():
+    play_song(query)
 
 root = tk.Tk()
 root.title("Music Player")
 root.geometry("420x600")
-root.config(bg="#1a1a1a")  # Dark background
+root.config(bg="#1a1a1a")
 
 logoImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/logo-spotify.jpg")
 logo = ImageTk.PhotoImage(logoImage)
@@ -13,14 +23,14 @@ root.iconphoto(True, logo)
 # --- Load images ---
 searchImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/search.jpg")
 searchImage = searchImage.resize((25, 25))
-search = ImageTk.PhotoImage(searchImage)
+search_icon = ImageTk.PhotoImage(searchImage)
 
 mainImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/note.jpg")
 mainImage = mainImage.resize((250, 250))
 photo = ImageTk.PhotoImage(mainImage)
 
 playImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/play.jpg").resize((60, 60))
-play = ImageTk.PhotoImage(playImage)
+play_icon = ImageTk.PhotoImage(playImage)
 
 nextImage = Image.open("C:/Users/bismiallah/Desktop/Projects/Music-Player-app/assets/right arrow.jpg").resize((50, 50))
 next_btn = ImageTk.PhotoImage(nextImage)
@@ -32,9 +42,13 @@ previous_btn = ImageTk.PhotoImage(previousImage)
 top_frame = tk.Frame(root, bg="#1a1a1a", height=60)
 top_frame.pack(fill="x", padx=10, pady=10)
 
-search_button = tk.Button(top_frame, image=search, bd=0, bg="#1a1a1a", 
-                          activebackground="#2a2a2a", cursor="hand2")
+search_button = tk.Button(top_frame, image=search_icon, bd=0, bg="#1a1a1a", 
+                          activebackground="#2a2a2a", cursor="hand2", command=search)
 search_button.pack(side="right")
+
+search_input = tk.Entry(top_frame, width=80)
+search_input.pack(side="left", padx=100, pady=10)
+
 
 # Spacer to push album to center
 spacer = tk.Frame(root, bg="#1a1a1a", height=30)
@@ -45,11 +59,11 @@ album_label = tk.Label(root, image=photo, bg="#1a1a1a")
 album_label.pack(pady=20)
 
 # --- Song info ---
-song_title = tk.Label(root, text="Song Title", font=("Arial", 16, "bold"), 
+song_title = tk.Label(root, text="alarm", font=("Arial", 16, "bold"), 
                       bg="#1a1a1a", fg="white")
 song_title.pack(pady=5)
 
-artist_name = tk.Label(root, text="Artist Name", font=("Arial", 12), 
+artist_name = tk.Label(root, text="Artist ", font=("Arial", 12), 
                        bg="#1a1a1a", fg="#888888")
 artist_name.pack(pady=5)
 
@@ -80,9 +94,9 @@ previous = tk.Button(buttons_frame, image=previous_btn, bd=0, bg="#1a1a1a",
                      command=lambda: print("Previous"))
 previous.pack(side="left", padx=15)
 
-play_button = tk.Button(buttons_frame, image=play, bd=0, bg="#1a1a1a",
+play_button = tk.Button(buttons_frame, image=play_icon, bd=0, bg="#1a1a1a",
                         activebackground="#2a2a2a", cursor="hand2",
-                        command=lambda: print("Play"))
+                        command=play)
 play_button.pack(side="left", padx=15)
 
 next_button = tk.Button(buttons_frame, image=next_btn, bd=0, bg="#1a1a1a",
